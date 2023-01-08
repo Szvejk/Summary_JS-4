@@ -1,5 +1,6 @@
 const table = document.querySelector('.tabela');
 const tableBody = document.querySelector('#body');
+const deleteAll = document.querySelector('.deleteAll');
 
 async function getData() {
 	const response = await fetch('https://jsonplaceholder.typicode.com/comments');
@@ -15,7 +16,7 @@ getData().then((data) => {
 		tableBody.innerHTML += `
   
         <tr id='comment${element.id}'>
-        <td><input data-id={${element.id}} name={${element.name}}  type='checkbox'/></td>
+        <td><input data-id=${element.id} name=${element.name}  type='checkbox'/></td>
         <td>${element.id}</td>
 		<td>${element.name}</td>
         <td>${element.email}</td>
@@ -24,24 +25,21 @@ getData().then((data) => {
 		</tr>
         `;
 	});
+	// 	let btn = document.createElement("button");
+	// btn.innerHTML = "Click Me";
+	// document.body.appendChild(btn);
 
 	const buttons = Array.from(document.querySelectorAll('button'));
 	const inputs = Array.from(document.querySelectorAll('input'));
 
-	console.log(inputs);
 
-	// let result = function resultInputs() {
-	//     inputs.filter()
-	// }
 	let idToDelay = [];
 	inputs.forEach((input) => {
 		input.addEventListener('change', (e) => {
 			if (e.target.checked) {
 				idToDelay.push(e.target.dataset.id);
-				console.log(idToDelay);
 			} else {
 				idToDelay = idToDelay.filter((item) => item !== e.target.dataset.id);
-				console.log(idToDelay);
 			}
 		});
 	});
@@ -49,8 +47,18 @@ getData().then((data) => {
 	buttons.forEach((button) => {
 		button.addEventListener('click', (e) => {
 			const commentToRemove = document.querySelector(`#${e.target.dataset.id}`);
-			commentToRemove.remove();
+			if (commentToRemove) commentToRemove.remove();
 		});
 	});
+
+	deleteAll.addEventListener('click', (e) => {
+		if (idToDelay.length !== 0) {
+			idToDelay.forEach((item) => {
+				const getElement = document.getElementById(`comment${item}`);
+				if(getElement) getElement.remove()
+			})
+		}
+	});
 });
+
 // przefiltrowac po tablicy te zaznaczone i je wyrzucic

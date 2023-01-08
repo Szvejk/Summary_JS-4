@@ -37,4 +37,9 @@ body .tabela .space {
       -ms-flex-pack: justify;
           justify-content: space-between;
   margin: 10px;
+}
+body .tabela .deleteAll {
+  width: 90px;
+  margin: 10px;
+  height: 60px;
 }/*# sourceMappingURL=styles.css.map */
