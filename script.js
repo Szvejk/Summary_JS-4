@@ -16,26 +16,35 @@ getData().then((data) => {
 		tableBody.innerHTML += `
   
         <tr id='comment${element.id}'>
-        <td><input data-id=${element.id} name=${element.name}  type='checkbox'/></td>
+        <td><input id='checkbox'  data-id=${element.id} name=${element.name}  type='checkbox'/></td>
         <td>${element.id}</td>
 		<td>${element.name}</td>
         <td>${element.email}</td>
-        <td>${element.body}</td>
-        <td><button data-id='comment${element.id}'>Usun</button></td>
+         <td>${element.body} class = "bodys" </td>
+        <td><button data-id='comment${element.id}'>Usuń</button></td>
 		</tr>
         `;
 	});
-	// 	let btn = document.createElement("button");
-	// btn.innerHTML = "Click Me";
-	// document.body.appendChild(btn);
+	
 
 	const buttons = Array.from(document.querySelectorAll('button'));
-	const inputs = Array.from(document.querySelectorAll('input'));
+	const checkboxList = Array.from(document.querySelectorAll("#checkbox"));
+	const higlightText = document.getElementById('higlightText');
+
+// bodys.forEach((body) => {
+// higlightText.addEventListener('change', (e) => {
+// if(higlightText.checked&&body.includes = "itaque"){
+// 	bodys.style.color = 'red'
+// }
+// }
+// PROBLEM
+
+	
 
 
 	let idToDelay = [];
-	inputs.forEach((input) => {
-		input.addEventListener('change', (e) => {
+	checkboxList.forEach((checkbox) => {
+		checkbox.addEventListener('change', (e) => {
 			if (e.target.checked) {
 				idToDelay.push(e.target.dataset.id);
 			} else {
@@ -59,6 +68,8 @@ getData().then((data) => {
 			})
 		}
 	});
+
+	
 });
 
-// przefiltrowac po tablicy te zaznaczone i je wyrzucic
+
